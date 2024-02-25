@@ -1,0 +1,56 @@
+server:
+  port: ${SERVER_PORT}
+  ssl:
+    enabled: false
+    
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${HOST_URL_DATABASE}:${PORT_DATABASE}/${DATABASE}?useTimezone=true&serverTimezone=UTC
+    username: ${DATA_BASE_USENAME}
+    password: ${DATA_BASE_PASS}
+    testOnBorrow: true
+    validationQuery: SELECT 1
+    hikari:
+      maximum-pool-size: 500
+      minimum-idle: 60
+      idle-timeout: 4000
+  jpa:
+    hibernate.ddl-auto: validate
+    generate-ddl: true
+    show-sql: false
+    properties:
+      hibernate.format_sql: true
+      dialect: org.hibernate.dialect.MySQL8Dialect
+  mail:
+    host: ${EMAIL_HOST_SMTP}
+    port: ${EMAIL_PORT_SMTP}
+    username: ${EMAIL_USENAME}
+    password: ${EMAIL_PASS}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+      test-connection: true
+  rabbitmq:
+    host: ${HOST_RABBITMQ}
+    port: ${PORT_RABBITMQ}
+    username: ${USERNAME_RABBITMQ}
+    password: ${PASS_RABBITMQ}
+    virtual-host: /
+    addresses: ${HOST_RABBITMQ}:${PORT_RABBITMQ}
+
+apiAuth:
+  url: ${AUTH_SERVICE_URL}
+
+springdoc:
+  swagger-ui:
+    path: "/swagger-ui.html"
+    
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
