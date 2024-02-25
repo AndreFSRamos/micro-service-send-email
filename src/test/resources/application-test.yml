@@ -1,14 +1,14 @@
 server:
-  port: ${SERVER_PORT}
+  port: 8889
   ssl:
     enabled: false
-    
+
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${HOST_URL_DATABASE}:${PORT_DATABASE}/${DATABASE}?useTimezone=true&serverTimezone=UTC
-    username: ${DATA_BASE_USENAME}
-    password: ${DATA_BASE_PASS}
+    url: jdbc:mysql://localhost:8080/ms_email?useTimezone=true&serverTimezone=UTC
+    username: {user your data base}
+    password: {password your data base}
     testOnBorrow: true
     validationQuery: SELECT 1
     hikari:
@@ -22,11 +22,13 @@ spring:
     properties:
       hibernate.format_sql: true
       dialect: org.hibernate.dialect.MySQL8Dialect
+
+## Settings to service SMTP
   mail:
-    host: ${EMAIL_HOST_SMTP}
-    port: ${EMAIL_PORT_SMTP}
-    username: ${EMAIL_USERNAME}
-    password: ${EMAIL_PASS}
+    host: {HOST}
+    port: {PORT}
+    username: {USERNAME}
+    password: {PASSWORD}
     properties:
       mail:
         smtp:
@@ -34,21 +36,24 @@ spring:
           starttls:
             enable: true
       test-connection: true
-  rabbitmq:
-    host: ${HOST_RABBITMQ}
-    port: ${PORT_RABBITMQ}
-    username: ${USERNAME_RABBITMQ}
-    password: ${PASS_RABBITMQ}
-    virtual-host: /
-    addresses: ${HOST_RABBITMQ}:${PORT_RABBITMQ}
 
+## Settings to RabbitMQ
+  rabbitmq:
+    host: {HOST}
+    port: {PORT}
+    username: {USERNAME}
+    password: {PASSWORD}
+    virtual-host: /
+    addresses: {HOST}:{PORT}
+
+## Settings for the authentication microservice
 apiAuth:
-  url: ${AUTH_SERVICE_URL}
+  url: http://localhost:3100/api/auth/v1/validate-request-token
 
 springdoc:
   swagger-ui:
     path: "/swagger-ui.html"
-    
+
 logging:
   level:
     org:
