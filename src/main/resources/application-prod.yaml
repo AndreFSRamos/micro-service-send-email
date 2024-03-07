@@ -7,7 +7,7 @@ spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${HOST_URL_DATABASE}:${PORT_DATABASE}/${DATABASE}?useTimezone=true&serverTimezone=UTC
-    username: ${DATA_BASE_USENAME}
+    username: ${DATA_BASE_USERNAME}
     password: ${DATA_BASE_PASS}
     testOnBorrow: true
     validationQuery: SELECT 1
